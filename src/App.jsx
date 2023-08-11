@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import infosense from "../src/assest/Infosense.png";
 import Footer from "./Component/Footer";
@@ -9,6 +9,8 @@ import { BsTelephone } from "react-icons/bs";
 
 import UploadData from "./Component/UploadData";
 function App() {
+  const [filename, setFile] = useState(null);
+
   return (
     <>
       <div className="wrapper">
@@ -45,8 +47,27 @@ function App() {
           </div>
 
           <Row className="d-flex justify-content-center align-items-center">
-            <Col sm={12} md={6} lg={6}>
-              <UploadData />
+            <Col sm={12} md={6} lg={6} className="" >
+              <div className="mb-3 ">
+                <input
+                  className="form-control form-control-sm mb-2"
+                  id="formFileSm"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  type="file"
+                />
+                {filename && (
+                  <div>
+                    <img
+                      alt="not found"
+                      height={"250px"}
+                      className="w-100 mb-2"
+                      src={URL.createObjectURL(filename)}
+                    />
+                    <br />
+                    <button className="btn btn-info" onClick={() => setFile(null)}>Remove</button>
+                  </div>
+                )}
+              </div>
             </Col>
             <Col sm={12} md={6} lg={6}>
               <div className="Image_col">
